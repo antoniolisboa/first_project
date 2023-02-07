@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Stack(
-        alignment: AlignmentDirectional.center,
+      home: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             color: Colors.teal,
@@ -25,9 +25,9 @@ class MyApp extends StatelessWidget {
           ),
           Container(
             color: Colors.deepOrange,
-            height: 75,
-            width: 75,
-          ),
+            height: 300,
+            width: 300,
+          )
         ],
       ),
     );
