@@ -62,42 +62,45 @@ class Task extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Stack(
-        children: [
-          Container(
-            color: Colors.greenAccent,
-            height: 140,
-          ),
-          Container(
-            color: Colors.white,
-            height: 100,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  color: Colors.black26,
-                  height: 100,
-                  width: 75,
-                ),
-                Text(taskName),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll<Color>(
-                      Colors.greenAccent,
-                    ),
-                  ),
-                  child: const Icon(
-                    Icons.arrow_drop_up,
-                    color: Colors.black54,
-                  ),
-                )
-              ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        color: Colors.white,
+        child: Stack(
+          children: [
+            Container(
+              color: Colors.greenAccent,
+              height: 140,
             ),
-          )
-        ],
+            Container(
+              color: Colors.white,
+              height: 100,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    color: Colors.black26,
+                    height: 100,
+                    width: 75,
+                  ),
+                  Text(taskName),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: const ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll<Color>(
+                        Colors.greenAccent,
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.arrow_drop_up,
+                      color: Colors.black54,
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
