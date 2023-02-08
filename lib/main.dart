@@ -14,84 +14,88 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
-      home: Container(
-        color: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.greenAccent,
+          leading: const Icon(
+            Icons.list_alt,
+            color: Colors.black54,
+            size: 32,
+          ),
+          title: const Text(
+            'Tasks',
+            style: TextStyle(
+              color: Colors.black54,
+              fontSize: 22,
+            ),
+          ),
+        ),
+        body: Column(
           children: [
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                Container(
-                  color: Colors.teal,
-                  height: 100,
-                  width: 100,
-                ),
-                Container(
-                  color: Colors.deepOrange,
-                  height: 50,
-                  width: 50,
-                ),
-              ],
-            ),
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                Container(
-                  color: Colors.deepOrange,
-                  height: 100,
-                  width: 100,
-                ),
-                Container(
-                  color: Colors.teal,
-                  height: 50,
-                  width: 50,
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  color: Colors.amberAccent,
-                  height: 50,
-                  width: 50,
-                ),
-                Container(
-                  color: Colors.cyanAccent,
-                  height: 50,
-                  width: 50,
-                ),
-                Container(
-                  color: Colors.deepPurpleAccent,
-                  height: 50,
-                  width: 50,
-                ),
-              ],
-            ),
-            Container(
-              color: Colors.amber,
-              height: 30,
-              width: 300,
-              child: const Text(
-                'Hello World!',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 28,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () => print('Pressed Button'),
-              child: const Text('Press Button'),
-            )
+            Task(taskName: 'Learning Flutter'),
+            Task(taskName: 'Learning English',),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.greenAccent,
+          onPressed: () {},
+          child: const Icon(
+            Icons.add,
+            color: Colors.black54,
+          ),
         ),
       ),
     );
   }
 }
+
+class Task extends StatelessWidget {
+  final String taskName;
+
+  const Task({required this.taskName, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: Stack(
+        children: [
+          Container(
+            color: Colors.greenAccent,
+            height: 140,
+          ),
+          Container(
+            color: Colors.white,
+            height: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  color: Colors.black26,
+                  height: 100,
+                  width: 75,
+                ),
+                Text(taskName),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: const ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll<Color>(
+                      Colors.greenAccent,
+                    ),
+                  ),
+                  child: const Icon(
+                    Icons.arrow_drop_up,
+                    color: Colors.black54,
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
