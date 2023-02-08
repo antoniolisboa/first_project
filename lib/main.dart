@@ -32,9 +32,13 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        body: Column(
-          children: [
-            Task(taskName: 'Learning Flutter'),
+        body: ListView(
+          children: const [
+            Task(taskName: 'Learning Flutter',),
+            Task(taskName: 'Learning English',),
+            Task(taskName: 'Learning English',),
+            Task(taskName: 'Learning English',),
+            Task(taskName: 'Learning English',),
             Task(taskName: 'Learning English',),
           ],
         ),
