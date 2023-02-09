@@ -134,12 +134,31 @@ class _TaskState extends State<Task> {
                     ],
                   ),
                 ),
-                Text(
-                  'Level $level',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    color: Colors.black54
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: 250,
+                        child: LinearProgressIndicator(
+                          value: level / 10, // interval 0 -- 1
+                          color: Colors.black54,
+                          backgroundColor: Colors.black12,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Level $level',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             )
