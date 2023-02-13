@@ -38,26 +38,34 @@ class MyApp extends StatelessWidget {
               taskName: 'Aprender Flutter',
               image:
                   'https://pbs.twimg.com/media/Eu7m692XIAEvxxP?format=png&name=large',
+              difficulty: 3,
             ),
             Task(
               taskName: 'Andar de Bike',
               image:
                   'https://tswbike.com/wp-content/uploads/2020/09/108034687_626160478000800_2490880540739582681_n-e1600200953343.jpg',
+              difficulty: 2,
             ),
             Task(
               taskName: 'Meditar',
               image:
                   'https://manhattanmentalhealthcounseling.com/wp-content/uploads/2019/06/Top-5-Scientific-Findings-on-MeditationMindfulness-881x710.jpeg',
+              difficulty: 1,
             ),
             Task(
               taskName: 'Ler',
               image:
                   'https://thebogotapost.com/wp-content/uploads/2017/06/636052464065850579-137719760_flyer-image-1.jpg',
+              difficulty: 3,
             ),
             Task(
               taskName: 'Jogar',
               image: 'https://i.ibb.co/tB29PZB/kako-epifania-2022-2-c-pia.jpg',
+              difficulty: 0,
             ),
+            SizedBox(
+              height: 75,
+            )
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -76,10 +84,12 @@ class MyApp extends StatelessWidget {
 class Task extends StatefulWidget {
   final String taskName;
   final String image;
+  final int difficulty;
 
   const Task({
     required this.taskName,
     required this.image,
+    required this.difficulty,
     Key? key,
   }) : super(key: key);
 
@@ -128,13 +138,19 @@ class _TaskState extends State<Task> {
                             topLeft: Radius.circular(5),
                           ),
                         ),
-                        child: Image.network(
-                          widget.image,
-                          fit: BoxFit.cover,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                          ),
+                          child: Image.network(
+                            widget.image,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
                             width: 200,
@@ -147,6 +163,46 @@ class _TaskState extends State<Task> {
                               ),
                             ),
                           ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.star,
+                                size: 16,
+                                color: (widget.difficulty >= 1)
+                                    ? Colors.greenAccent
+                                    : Colors.greenAccent[100],
+                              ),
+                              Icon(
+                                Icons.star,
+                                size: 16,
+                                color: (widget.difficulty >= 2)
+                                    ? Colors.greenAccent
+                                    : Colors.greenAccent[100],
+                              ),
+                              Icon(
+                                Icons.star,
+                                size: 16,
+                                color: (widget.difficulty >= 3)
+                                    ? Colors.greenAccent
+                                    : Colors.greenAccent[100],
+                              ),
+                              Icon(
+                                Icons.star,
+                                size: 16,
+                                color: (widget.difficulty >= 4)
+                                    ? Colors.greenAccent
+                                    : Colors.greenAccent[100],
+                              ),
+                              Icon(
+                                Icons.star,
+                                size: 16,
+                                color: (widget.difficulty >= 5)
+                                    ? Colors.greenAccent
+                                    : Colors.greenAccent[100],
+                              ),
+                            ],
+                          )
                         ],
                       ),
                       ElevatedButton(
@@ -180,7 +236,9 @@ class _TaskState extends State<Task> {
                             Radius.circular(2),
                           ),
                           child: LinearProgressIndicator(
-                            value: level / 10, // interval 0 -- 1
+                            value: (widget.difficulty != 0)
+                                ? level / (10 * widget.difficulty)
+                                : 1, // interval 0 -- 1
                             color: Colors.black54,
                             backgroundColor: Colors.black12,
                           ),
