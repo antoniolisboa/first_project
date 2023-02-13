@@ -88,13 +88,22 @@ class _TaskState extends State<Task> {
         child: Stack(
           children: [
             Container(
-              color: Colors.greenAccent,
               height: 140,
+              decoration: const BoxDecoration(
+                color: Colors.greenAccent,
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+              ),
             ),
             Column(
               children: [
                 Container(
-                  color: Colors.white,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                    ),
+                  ),
                   height: 100,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,10 +150,15 @@ class _TaskState extends State<Task> {
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
                         width: 250,
-                        child: LinearProgressIndicator(
-                          value: level / 10, // interval 0 -- 1
-                          color: Colors.black54,
-                          backgroundColor: Colors.black12,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(2),
+                          ),
+                          child: LinearProgressIndicator(
+                            value: level / 10, // interval 0 -- 1
+                            color: Colors.black54,
+                            backgroundColor: Colors.black12,
+                          ),
                         ),
                       ),
                     ),
