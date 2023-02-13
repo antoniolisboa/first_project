@@ -35,22 +35,28 @@ class MyApp extends StatelessWidget {
         body: ListView(
           children: const [
             Task(
-              taskName: 'Learning Flutter',
+              taskName: 'Aprender Flutter',
+              image:
+                  'https://pbs.twimg.com/media/Eu7m692XIAEvxxP?format=png&name=large',
             ),
             Task(
-              taskName: 'Learning English',
+              taskName: 'Andar de Bike',
+              image:
+                  'https://tswbike.com/wp-content/uploads/2020/09/108034687_626160478000800_2490880540739582681_n-e1600200953343.jpg',
             ),
             Task(
-              taskName: 'Learning Python is too easy!',
+              taskName: 'Meditar',
+              image:
+                  'https://manhattanmentalhealthcounseling.com/wp-content/uploads/2019/06/Top-5-Scientific-Findings-on-MeditationMindfulness-881x710.jpeg',
             ),
             Task(
-              taskName: 'Learning Figma',
+              taskName: 'Ler',
+              image:
+                  'https://thebogotapost.com/wp-content/uploads/2017/06/636052464065850579-137719760_flyer-image-1.jpg',
             ),
             Task(
-              taskName: 'Learning UI Design',
-            ),
-            Task(
-              taskName: 'Learning Dart',
+              taskName: 'Jogar',
+              image: 'https://i.ibb.co/tB29PZB/kako-epifania-2022-2-c-pia.jpg',
             ),
           ],
         ),
@@ -69,8 +75,13 @@ class MyApp extends StatelessWidget {
 
 class Task extends StatefulWidget {
   final String taskName;
+  final String image;
 
-  const Task({required this.taskName, Key? key}) : super(key: key);
+  const Task({
+    required this.taskName,
+    required this.image,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Task> createState() => _TaskState();
@@ -109,20 +120,34 @@ class _TaskState extends State<Task> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        color: Colors.black26,
                         height: 100,
                         width: 75,
-                      ),
-                      SizedBox(
-                        width: 200,
-                        child: Text(
-                          widget.taskName,
-                          style: const TextStyle(
-                            color: Colors.black54,
-                            overflow: TextOverflow.ellipsis,
-                            fontSize: 24,
+                        decoration: const BoxDecoration(
+                          color: Colors.black26,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(5),
                           ),
                         ),
+                        child: Image.network(
+                          widget.image,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 200,
+                            child: Text(
+                              widget.taskName,
+                              style: const TextStyle(
+                                color: Colors.black54,
+                                overflow: TextOverflow.ellipsis,
+                                fontSize: 24,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       ElevatedButton(
                         onPressed: () {
