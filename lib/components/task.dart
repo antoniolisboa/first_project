@@ -62,7 +62,7 @@ class _TaskState extends State<Task> {
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(5),
                           ),
-                          child: Image.network(
+                          child: Image.asset(
                             widget.image,
                             fit: BoxFit.cover,
                           ),
