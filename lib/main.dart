@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'difficulty.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,7 +56,7 @@ class _MyAppState extends State<MyApp> {
         body: AnimatedOpacity(
           opacity: isOpacity ? 1 : 0,
           duration: const Duration(
-            seconds: 1,
+            milliseconds: 800,
           ),
           child: ListView(
             children: const [
@@ -198,46 +199,7 @@ class _TaskState extends State<Task> {
                               ),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.star,
-                                size: 16,
-                                color: (widget.difficulty >= 1)
-                                    ? Colors.greenAccent
-                                    : Colors.greenAccent[100],
-                              ),
-                              Icon(
-                                Icons.star,
-                                size: 16,
-                                color: (widget.difficulty >= 2)
-                                    ? Colors.greenAccent
-                                    : Colors.greenAccent[100],
-                              ),
-                              Icon(
-                                Icons.star,
-                                size: 16,
-                                color: (widget.difficulty >= 3)
-                                    ? Colors.greenAccent
-                                    : Colors.greenAccent[100],
-                              ),
-                              Icon(
-                                Icons.star,
-                                size: 16,
-                                color: (widget.difficulty >= 4)
-                                    ? Colors.greenAccent
-                                    : Colors.greenAccent[100],
-                              ),
-                              Icon(
-                                Icons.star,
-                                size: 16,
-                                color: (widget.difficulty >= 5)
-                                    ? Colors.greenAccent
-                                    : Colors.greenAccent[100],
-                              ),
-                            ],
-                          )
+                          Difficulty(difficultyLevel: widget.difficulty),
                         ],
                       ),
                       ElevatedButton(
