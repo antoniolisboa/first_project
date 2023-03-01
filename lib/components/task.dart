@@ -19,6 +19,13 @@ class Task extends StatefulWidget {
 
 class _TaskState extends State<Task> {
   int level = 0;
+  List<Color> masteryColors = [
+    Colors.greenAccent,
+    Colors.blueAccent,
+    Colors.purpleAccent,
+    Colors.black38,
+  ];
+  Color taskColor = Colors.greenAccent;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +37,9 @@ class _TaskState extends State<Task> {
           children: [
             Container(
               height: 140,
-              decoration: const BoxDecoration(
-                color: Colors.greenAccent,
-                borderRadius: BorderRadius.all(Radius.circular(5)),
+              decoration: BoxDecoration(
+                color: taskColor,
+                borderRadius: const BorderRadius.all(Radius.circular(5)),
               ),
             ),
             Column(
@@ -89,7 +96,12 @@ class _TaskState extends State<Task> {
                       ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            level++;
+                            if (level == (widget.difficulty * 10)) {
+                              selectMasteryColor(color: taskColor);
+                              if (taskColor != Colors.black) level = 0;
+                            } else {
+                              level++;
+                            }
                           });
                         },
                         style: const ButtonStyle(
@@ -144,5 +156,13 @@ class _TaskState extends State<Task> {
         ),
       ),
     );
+  }
+
+  void selectMasteryColor({required Color color}) {
+    if (taskColor != Colors.black) {
+      taskColor = masteryColors.elementAt(
+        masteryColors.indexOf(taskColor) + 1,
+      );
+    }
   }
 }
