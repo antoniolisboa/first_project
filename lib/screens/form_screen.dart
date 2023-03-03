@@ -96,7 +96,8 @@ class FormScreenState extends State<FormScreen> {
                             return 'No difficulty defined for the task.';
                           } else {
                             try {
-                              if (int.parse(value!) < 0 || int.parse(value) > 5) {
+                              if (int.parse(value!) < 0 ||
+                                  int.parse(value) > 5) {
                                 return 'Value is not in the range of 0 to 5.';
                               }
                             } catch (e) {
@@ -208,14 +209,10 @@ class FormScreenState extends State<FormScreen> {
                       const SizedBox(height: 10),
                       ElevatedButton(
                         onPressed: () {
-                          print('aaa0');
                           if (_formKey.currentState!.validate()) {
                             print(nameController.text);
                             print(difficultController.text);
                             print(imageController.text);
-                          } else {
-                            print('aaa');
-                            print(difficultController.text);
                           }
                         },
                         style: ElevatedButton.styleFrom(
