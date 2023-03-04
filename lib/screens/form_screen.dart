@@ -213,6 +213,19 @@ class FormScreenState extends State<FormScreen> {
                             print(nameController.text);
                             print(difficultController.text);
                             print(imageController.text);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  'Success',
+                                  style: TextStyle(
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                backgroundColor: Colors.white,
+                              ),
+                            );
+
+                            Navigator.pop(context);
                           }
                         },
                         style: ElevatedButton.styleFrom(
