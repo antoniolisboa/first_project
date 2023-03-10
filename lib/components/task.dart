@@ -5,8 +5,10 @@ class Task extends StatefulWidget {
   final String taskName;
   final String image;
   final int difficulty;
+  int level = 0;
 
-  const Task({
+  Task({
+    this.level = 0,
     required this.taskName,
     required this.image,
     required this.difficulty,
@@ -18,7 +20,6 @@ class Task extends StatefulWidget {
 }
 
 class _TaskState extends State<Task> {
-  int level = 0;
   List<Color> masteryColors = [
     Colors.greenAccent,
     Colors.blueAccent,
@@ -39,7 +40,17 @@ class _TaskState extends State<Task> {
               height: 140,
               decoration: BoxDecoration(
                 color: taskColor,
-                borderRadius: const BorderRadius.all(Radius.circular(5)),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black54.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
             ),
             Column(
@@ -48,8 +59,8 @@ class _TaskState extends State<Task> {
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(5),
-                      topRight: Radius.circular(5),
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
                     ),
                   ),
                   height: 100,
@@ -62,17 +73,22 @@ class _TaskState extends State<Task> {
                         decoration: const BoxDecoration(
                           color: Colors.black26,
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(5),
+                            topLeft: Radius.circular(10),
                           ),
                         ),
                         child: ClipRRect(
                           borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(5),
+                            topLeft: Radius.circular(10),
                           ),
-                          child: Image.asset(
-                            widget.image,
-                            fit: BoxFit.cover,
-                          ),
+                          child: assetOrNetwork()
+                              ? Image.asset(
+                                  widget.image,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.network(
+                                  widget.image,
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                       ),
                       Column(
@@ -93,25 +109,30 @@ class _TaskState extends State<Task> {
                           Difficulty(difficultyLevel: widget.difficulty),
                         ],
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            if (level == (widget.difficulty * 10)) {
-                              selectMasteryColor(color: taskColor);
-                              if (taskColor != Colors.black) level = 0;
-                            } else {
-                              level++;
-                            }
-                          });
-                        },
-                        style: const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll<Color>(
-                            Colors.greenAccent,
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              if (widget.level == (widget.difficulty * 10)) {
+                                selectMasteryColor(color: taskColor);
+                                if (taskColor != Colors.black) {
+                                  widget.level = 0;
+                                }
+                              } else {
+                                widget.level++;
+                              }
+                            });
+                          },
+                          style: const ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll<Color>(
+                              Colors.greenAccent,
+                            ),
                           ),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_drop_up,
-                          color: Colors.black54,
+                          child: const Icon(
+                            Icons.arrow_drop_up,
+                            color: Colors.black54,
+                          ),
                         ),
                       )
                     ],
@@ -130,7 +151,7 @@ class _TaskState extends State<Task> {
                           ),
                           child: LinearProgressIndicator(
                             value: (widget.difficulty != 0)
-                                ? level / (10 * widget.difficulty)
+                                ? widget.level / (10 * widget.difficulty)
                                 : 1, // interval 0 -- 1
                             color: Colors.black54,
                             backgroundColor: Colors.black12,
@@ -141,7 +162,7 @@ class _TaskState extends State<Task> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Level $level',
+                        'Level ${widget.level}',
                         style: const TextStyle(
                           fontSize: 18,
                           color: Colors.black54,
@@ -156,6 +177,14 @@ class _TaskState extends State<Task> {
         ),
       ),
     );
+  }
+
+  bool assetOrNetwork() {
+    if (widget.image.contains('http')) {
+      return false;
+    }
+
+    return true;
   }
 
   void selectMasteryColor({required Color color}) {

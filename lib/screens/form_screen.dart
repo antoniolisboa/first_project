@@ -1,7 +1,10 @@
+import 'package:first_project/data/task_inherited.dart';
 import 'package:flutter/material.dart';
 
 class FormScreen extends StatefulWidget {
-  const FormScreen({super.key});
+  final BuildContext taskContext;
+
+  const FormScreen({super.key, required this.taskContext});
 
   @override
   State<FormScreen> createState() => FormScreenState();
@@ -9,7 +12,7 @@ class FormScreen extends StatefulWidget {
 
 class FormScreenState extends State<FormScreen> {
   TextEditingController nameController = TextEditingController();
-  TextEditingController difficultController = TextEditingController();
+  TextEditingController difficultyController = TextEditingController();
   TextEditingController imageController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
@@ -55,7 +58,7 @@ class FormScreenState extends State<FormScreen> {
                     children: [
                       TextFormField(
                         validator: (String? value) {
-                          if (value != null && value.isEmpty) {
+                          if (valueValidator(value)) {
                             return 'No name defined for the task.';
                           }
                           return null;
@@ -91,13 +94,11 @@ class FormScreenState extends State<FormScreen> {
                       const SizedBox(height: 20),
                       TextFormField(
                         validator: (String? value) {
-                          print(value);
-                          if (value != null && value.isEmpty) {
+                          if (valueValidator(value)) {
                             return 'No difficulty defined for the task.';
                           } else {
                             try {
-                              if (int.parse(value!) < 0 ||
-                                  int.parse(value) > 5) {
+                              if (difficultyValidator(value)) {
                                 return 'Value is not in the range of 0 to 5.';
                               }
                             } catch (e) {
@@ -107,7 +108,7 @@ class FormScreenState extends State<FormScreen> {
 
                           return null;
                         },
-                        controller: difficultController,
+                        controller: difficultyController,
                         keyboardType: TextInputType.number,
                         textAlign: TextAlign.center,
                         decoration: const InputDecoration(
@@ -139,7 +140,7 @@ class FormScreenState extends State<FormScreen> {
                       const SizedBox(height: 20),
                       TextFormField(
                         validator: (String? value) {
-                          if (value != null && value.isEmpty) {
+                          if (valueValidator(value)) {
                             return 'No image link defined for the task.';
                           }
                           return null;
@@ -210,9 +211,12 @@ class FormScreenState extends State<FormScreen> {
                       ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            print(nameController.text);
-                            print(difficultController.text);
-                            print(imageController.text);
+                            TaskInherited.of(widget.taskContext).newTask(
+                              taskName: nameController.text,
+                              image: imageController.text,
+                              difficulty: int.parse(difficultyController.text),
+                            );
+
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text(
@@ -247,5 +251,13 @@ class FormScreenState extends State<FormScreen> {
         ),
       ),
     );
+  }
+
+  bool valueValidator(String? value) {
+    return value == null || value.isEmpty;
+  }
+
+  bool difficultyValidator(String? value) {
+    return value == null || int.parse(value) < 0 || int.parse(value) > 5;
   }
 }
