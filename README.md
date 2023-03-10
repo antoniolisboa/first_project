@@ -1,16 +1,20 @@
-# first_project
+# Task App em Flutter
 
-My first project in Flutter
+## Funcionalidade
+<p align="center">
+<img src="readme/taskapp.gif" width=300>
+</p>
 
-## Getting Started
+<h3 align="center">Tecnologias utilizadas e plataformas suportadas</h3>
+<p align="center">
+<img src="https://img.shields.io/badge/-Dart-0175C2?logo=dart" height=25>
+<img src="https://img.shields.io/badge/-Flutter-02569B?logo=flutter" height=25>
+<img src="https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white" height=25>
+<img src="https://img.shields.io/badge/-GitHub-181717?logo=github" height=25>
+<img src="https://img.shields.io/badge/-Android-3DDC84?logo=android&logoColor=white" height=25>
+<img src="https://img.shields.io/badge/-IOS-000000?logo=ios" height=25>
+<img src="https://img.shields.io/badge/-Visual%20Studio%20Code-007ACC?logo=visual-studio-code" height=25>
+</p>
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Descrição
+Este projeto está sendo construído durante minha formação em flutter na Alura, sendo um dos meus primeiros trabalhos com este Framework. Ele implementa vários conceitos importantes para criação de apps.
